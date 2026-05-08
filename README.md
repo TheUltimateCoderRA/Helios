@@ -13,3 +13,5 @@ This project is compatible with the following Python versions:
 Install the required dependencies within your virtual environment:
 ```bash
 pip install mediapipe opencv-python pandas scikit-learn pyautogui joblib numpy
+
+or use john.txt
