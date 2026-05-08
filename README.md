@@ -1,1 +1,15 @@
- Helios\nUses OpenCV and MediaPipe to record hand landmarks, convert them into coordinate features, recognize gestures using Scikit-Learn, and control your PC with those gestures via PyAutoGUI.\n\n## Project Status\nThis project comes with a baseline model, but it is trained on a limited dataset and may not be 100% reliable for all users. We strongly recommend that you gather your own custom dataset and use the provided scripts to retrain the model for better accuracy in your specific environment.\n\n## Python Compatibility\n- **Recommended:** Python 3.11 to 3.12.\n- **Warning:** You may encounter significant compatibility issues with legacy versions or Python 3.13 due to how modern AI libraries handle C++ binaries and dependencies.\n\n## Setup & Installation\n1. Ensure you are using a virtual environment (Python 3.11 or 3.12).\n2. Install the necessary dependencies:\n   ```bash\n   pip install mediapipe opencv-python pandas scikit-learn pyautogui joblib numpy\n   ```\n3. Download the `hand_landmarker.task` file from Google's official MediaPipe repository and place it in the project root directory.\n\n## Workflow\n### 1. Data Collection\nOrganize your training images into folders within your project directory:\n- `/Click` (OK sign)\n- `/Right Click` (Fist)\n- `/Open` (Palm)\n\n### 2. Processing & Training\n- Run `trainData.py` to extract features from your images and generate `trainData.csv`.\n- Run the training snippet using `SVC` (Support Vector Classifier) to create `gestureModel.pkl`.\n\n### 3. Real-Time Control\n- Ensure `gestureModel.pkl` and `hand_landmarker.task` are present.\n- Run `main.py` to initiate real-time hand tracking.\n- **Steering:** Use an open palm to move the cursor.\n- **Fail-safe:** If the system acts erratically, slam your mouse cursor into any corner of the screen to trigger PyAutoGUI's automatic shutdown.\n\n## Stability Features\n- **Confidence Thresholding:** Ignores low-confidence predictions (<85%).\n- **Temporal Smoothing:** Uses a deque buffer to ensure gestures are consistent across frames.\n- **Debouncing:** Prevents accidental double-clicks using a cooldown timer."
+# Helios
+Uses OpenCV and MediaPipe to record hand landmarks, convert them into coordinate features, recognize gestures using Sklearn, and control your PC with those gestures via PyAutoGui.
+
+## Project Status
+This project has a limited dataset and therefore is not reliable for all environments. We recommend you gather your own dataset and use `data.py` to convert images to coordinates, then train the model again using `train.py`.
+
+## Python Compatibility
+This project is compatible with the following Python versions:
+- **Supported:** 3.11 to 3.12  
+- **Warning:** You may get errors on legacy versions (3.8 and below) as well as 3.13 due to C++ binary dependency conflicts.
+
+## Installation
+Install the required dependencies within your virtual environment:
+```bash
+pip install mediapipe opencv-python pandas scikit-learn pyautogui joblib numpy
